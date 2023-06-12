@@ -152,13 +152,13 @@ func (p *hostPathProvisioner) Delete(volume *v1.PersistentVolume) error {
 	ann, ok := volume.Annotations[provisionerIDAnn]
 	if !ok {
 		glog.Infof("not removing volume <%s>: identity annotation <%s> missing",
-			   volume.Name, provisionerIDAnn)
+			volume.Name, provisionerIDAnn)
 		return errors.New("identity annotation not found on PV")
 	}
 
 	if ann != p.identity {
 		glog.Infof("not removing volume <%s>: identity annotation <%s> does not match ours <%s>",
-			   volume.Name, p.identity, provisionerIDAnn)
+			volume.Name, p.identity, provisionerIDAnn)
 		return &controller.IgnoredError{Reason: "identity annotation on PV does not match ours"}
 	}
 
@@ -172,14 +172,14 @@ func (p *hostPathProvisioner) Delete(volume *v1.PersistentVolume) error {
 		metav1.GetOptions{})
 	if err != nil {
 		glog.Infof("not removing volume <%s>: failed to fetch storageclass: %s",
-			   volume.Name, err)
+			volume.Name, err)
 		return err
 	}
 
 	params, err := p.parseParameters(class.Parameters)
 	if err != nil {
 		glog.Infof("not removing volume <%s>: failed to parse storageclass parameters: %s",
-			   volume.Name, err)
+			volume.Name, err)
 		return err
 	}
 
